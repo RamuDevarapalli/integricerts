@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Change directory to the subfolder 'IntegriCertServer'
+                dir('IntegriCertServer') {
+                    // Run Maven build commands
+                    sh 'mvn clean install'
+                }
+            }
+        }
+		
+		stage('Start Spring App') {
+            steps {
+                // Start the Spring App
+                sh 'java -jar IntegriCertServer/target/integricert.jar &'
+            }
+        }
+        
+        stage('Start React App') {
+            steps {
+                dir('IntegriCertClient') {
+					// Enter into root user
+                    sh 'sudo su'
+					
+                    // Install dependencies
+                    sh 'npm install --force'
+                    
+                    // Build the React app
+                    // sh 'npm run build'
+                    
+                    // Start the React app (assumed to use npm start)
+                    sh 'npm start &'
+                }
+            }
+        }
+    }
+}

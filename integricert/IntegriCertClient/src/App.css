@@ -1,0 +1,20 @@
+.custom-file-upload {
+  border: 2px dashed #007bff;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #007bff;
+  transition: all 0.3s ease-in-out;
+}
+.upload-icon {
+  font-size: 24px;
+}
+.custom-file-upload:hover {
+  background-color: #f8f9fa;
+}
